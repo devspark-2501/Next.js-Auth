@@ -19,7 +19,6 @@ export default function RegisterForm() {
         }
 
         try {
-            // ✅ Step 1: Check if user already exists
             const existRes = await fetch('/api/UserExist', {
                 method: "POST",
                 headers: {
@@ -35,7 +34,6 @@ export default function RegisterForm() {
                 return;
             }
 
-            // ✅ Step 2: Register user
             const res = await fetch('/api/register', {
                 method: "POST",
                 headers: {

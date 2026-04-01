@@ -15,31 +15,25 @@ const authOptions = {
             },
 
             async authorize(credentials) {
-                try {
-                    await connectDB();
+                await connectDB();
 
-                    const user = await User.findOne({
-                        email: credentials.email
-                    });
+                const user = await User.findOne({
+                    email: credentials.email.toLowerCase()
+                });
 
-                    if (!user) {
-                        throw new Error("User not found");
-                    }
+                if (!user) return null;
 
                     const isPasswordCorrect = await bcrypt.compare(
                         credentials.password,
                         user.password
                     );
 
-                    if (!isPasswordCorrect) {
-                        throw new Error("Invalid password");
-                    }
+                if (!isPasswordCorrect) return null;
 
-                    return user;
-
-                } catch (error) {
-                    throw new Error(error.message);
-                }
+                return {
+                    id: user._id.toString(),
+                    email: user.email,
+                };
             }
         })
     ],
@@ -49,7 +43,7 @@ const authOptions = {
     },
 
     pages: {
-        signIn: "/login",
+        signIn: "/",
     },
 
     secret: process.env.NEXTAUTH_SECRET,
