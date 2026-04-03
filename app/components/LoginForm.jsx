@@ -45,7 +45,7 @@ export default function LoginForm() {
             <div className="grid place-items-center h-screen">
                 <div className="shadow-lg p-5 rounded-lg border-t-4 border-green-400 text-center">
                     <h1 className="text-xl font-bold mb-4">
-                        ✅ Logged in as {session.user?.email}
+                        Logged in as {session.user?.email}
                     </h1>
 
                     <button
