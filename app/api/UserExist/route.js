@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
     try {
         await connectDB();
+        console.log("connected to DB");
 
         const { email } = await request.json();
 
